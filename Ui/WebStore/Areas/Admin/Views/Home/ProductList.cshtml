@@ -1,0 +1,67 @@
+﻿@model WebStore.DomainNew.Dto.PagedProductDto
+
+@{
+    ViewData["Title"] = "Список товаров";
+}
+
+<a asp-action="Edit" class="btn btn-success">Добавить продукт</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Section)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Price)
+            </th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" title="Редактировать" asp-route-Id="@item.Id">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Section.Name)
+                </td>
+                <td>
+                    <img src="~/images/shop/@item.ImageUrl" width="50px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    <a asp-action="Delete" asp-route-Id="@item.Id" title="Удалить">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
